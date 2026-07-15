@@ -1,0 +1,40 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+:root{--accent:#d4fc50;--accent-soft:#f3ffd4;--bg:#f4f4f4;--card:#fff;--ink:#111;
+  --sub:rgba(17,17,17,.55);--mut:rgba(17,17,17,.4);--line:rgba(17,17,17,.1);--lime-ink:#6f9f18}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+.stage{width:3000px;height:1000px;position:relative;overflow:hidden;background:
+  radial-gradient(50% 90% at 50% -10%,rgba(212,252,80,.42),transparent 64%),
+  radial-gradient(40% 80% at 92% 110%,rgba(212,252,80,.22),transparent 62%),
+  var(--bg)}
+/* X crops the banner and the avatar overlaps lower-left — keep the payload centred */
+.wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:64px}
+.mark{font-family:'Instrument Serif',Georgia,serif;font-size:330px;line-height:.8;
+  background:linear-gradient(165deg,#ffffff 3%,#eefbc4 24%,var(--accent) 56%,#93b52f 92%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 rgba(255,255,255,.9)) drop-shadow(0 16px 46px rgba(140,180,40,.5))}
+.txt{display:flex;flex-direction:column}
+.name{font-family:'Instrument Serif',Georgia,serif;font-size:184px;line-height:1;letter-spacing:2px}
+.tag{font-size:52px;color:var(--sub);margin-top:16px;font-weight:500}
+.tag b{color:var(--lime-ink);font-weight:700}
+.rule{width:3px;height:300px;background:var(--line)}
+.right{display:flex;flex-direction:column;gap:22px}
+.chip{font-size:44px;font-weight:800;letter-spacing:1px;color:#111;background:var(--accent);border-radius:999px;padding:16px 44px;box-shadow:0 12px 40px rgba(212,252,80,.45);text-align:center}
+.chip.ghost{background:transparent;color:var(--ink);border:3px solid rgba(17,17,17,.16);box-shadow:none;font-weight:700}
+.url{font-size:36px;color:var(--mut);font-weight:600;text-align:center;letter-spacing:1px}
+</style></head>
+<body><div class="stage"><div class="wrap">
+  <div class="mark">Ω</div>
+  <div class="txt">
+    <div class="name">PONSI</div>
+    <div class="tag">the <b>self-aware</b> reserve · (3,3)</div>
+  </div>
+  <div class="rule"></div>
+  <div class="right">
+    <div class="chip">$PONSI</div>
+    <div class="chip ghost">on PONS</div>
+    <div class="url">ponsponsi.xyz</div>
+  </div>
+</div></div></body></html>

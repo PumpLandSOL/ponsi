@@ -1,0 +1,72 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+:root{--accent:#d4fc50;--accent-soft:#f3ffd4;--bg:#f4f4f4;--card:#fff;--ink:#111;
+  --sub:rgba(17,17,17,.55);--mut:rgba(17,17,17,.4);--line:rgba(17,17,17,.1);--lime-ink:#6f9f18;--red:#ff3b30}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+.stage{width:2400px;height:1350px;position:relative;overflow:hidden;background:
+  radial-gradient(50% 44% at 50% -8%,rgba(212,252,80,.34),transparent 64%),
+  radial-gradient(46% 40% at 96% 106%,rgba(212,252,80,.14),transparent 62%),
+  var(--bg)}
+.wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding:70px 90px}
+.hd{display:flex;align-items:center;gap:16px}
+.mark{font-family:'Instrument Serif',Georgia,serif;font-size:66px;line-height:.8;
+  background:linear-gradient(165deg,#ffffff 3%,#eefbc4 24%,var(--accent) 56%,#93b52f 92%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 rgba(255,255,255,.9)) drop-shadow(0 8px 22px rgba(140,180,40,.5))}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:44px;letter-spacing:2px}
+h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:84px;margin-top:14px;letter-spacing:-1px}
+.sub{font-size:29px;color:var(--sub);margin-top:12px;text-align:center;max-width:1480px;line-height:1.55}
+.cols{display:flex;gap:30px;margin-top:46px}
+.c{width:940px;background:var(--card);border:2px solid var(--line);border-radius:30px;padding:40px 42px;
+  box-shadow:0 2px 14px rgba(17,17,17,.05);position:relative;overflow:hidden}
+.c::before{content:"";position:absolute;top:0;left:0;right:0;height:7px}
+.c.real::before{background:var(--accent)}
+.c.sim::before{background:rgba(17,17,17,.3)}
+.ct{font-family:'Instrument Serif',Georgia,serif;font-size:56px;line-height:1}
+.cs{font-size:24px;color:var(--mut);margin-top:8px;font-weight:600}
+ul{list-style:none;margin-top:26px;border-top:2px solid var(--line)}
+li{display:flex;align-items:flex-start;gap:16px;padding:17px 0;border-bottom:2px solid var(--line);font-size:28px;color:var(--sub);line-height:1.4}
+li:last-child{border-bottom:none}
+li b{color:var(--ink);font-weight:600}
+.i{flex:none;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:24px;font-weight:800;margin-top:1px}
+.i.y{background:var(--accent);color:#111}
+.i.n{background:rgba(17,17,17,.1);color:var(--mut)}
+.foot{margin-top:44px;background:#111;border-radius:26px;padding:34px 54px;max-width:1920px;text-align:center}
+.foot .t{font-family:'Instrument Serif',Georgia,serif;font-size:48px;color:#fff;line-height:1.24}
+.foot .t em{font-style:italic;color:var(--accent)}
+.foot .s{font-size:25px;color:rgba(255,255,255,.55);margin-top:12px;line-height:1.55}
+</style></head>
+<body><div class="stage"><div class="wrap">
+  <div class="hd"><span class="mark">Ω</span><span class="logo">PONSI</span></div>
+  <h1>What's real. What's not.</h1>
+  <div class="sub">No (3,3) has ever published this table. It costs us nothing, because we told you in the name.</div>
+  <div class="cols">
+    <div class="c real">
+      <div class="ct">Real</div>
+      <div class="cs">verifiable, on-chain or in the open</div>
+      <ul>
+        <li><span class="i y">✓</span><span>The <b>$PONSI token</b> — a fixed-supply ERC-20 minted on PONS, Robinhood Chain</span></li>
+        <li><span class="i y">✓</span><span>Your <b>wallet</b> and everything in it — the app only ever reads the address</span></li>
+        <li><span class="i y">✓</span><span>The <b>source code</b> — read the ledger yourself and check every claim here</span></li>
+        <li><span class="i y">✓</span><span>The <b>joke</b>, which is load-bearing</span></li>
+      </ul>
+    </div>
+    <div class="c sim">
+      <div class="ct">Simulated</div>
+      <div class="cs">an off-chain ledger — a game, not a contract</div>
+      <ul>
+        <li><span class="i n">✕</span><span><b>Staking, sPONSI and the rebase</b> — PONS mints fixed supply, so no contract can emit</span></li>
+        <li><span class="i n">✕</span><span>The <b>index</b>, the <b>50,000% APY</b> and every ROI on the calculator</span></li>
+        <li><span class="i n">✕</span><span>The <b>treasury</b>, <b>backing per token</b> and <b>runway</b></span></li>
+        <li><span class="i n">✕</span><span><b>Bonds</b> and their vesting — nothing is bought, nothing is owed</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot">
+    <div class="t">It cannot run away with your money.<br><em>It never touches it.</em></div>
+    <div class="s">There is no deposit, no approval, no custody and no contract call — the app reads your address and nothing else. No return is promised, and none could be. The name is not irony. Do not put in money you want back.</div>
+  </div>
+</div></div></body></html>

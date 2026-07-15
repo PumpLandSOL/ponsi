@@ -1,0 +1,83 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+:root{--accent:#d4fc50;--accent-soft:#f3ffd4;--bg:#f4f4f4;--card:#fff;--ink:#111;
+  --sub:rgba(17,17,17,.55);--mut:rgba(17,17,17,.4);--line:rgba(17,17,17,.1);--lime-ink:#6f9f18;--red:#ff3b30}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+.stage{width:2400px;height:1350px;position:relative;overflow:hidden;background:
+  radial-gradient(50% 44% at 50% -8%,rgba(212,252,80,.34),transparent 64%),
+  radial-gradient(46% 40% at 96% 106%,rgba(212,252,80,.14),transparent 62%),
+  var(--bg)}
+.wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:66px 80px}
+.hd{display:flex;align-items:center;gap:16px}
+.mark{font-family:'Instrument Serif',Georgia,serif;font-size:66px;line-height:.8;
+  background:linear-gradient(165deg,#ffffff 3%,#eefbc4 24%,var(--accent) 56%,#93b52f 92%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 rgba(255,255,255,.9)) drop-shadow(0 8px 22px rgba(140,180,40,.5))}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:44px;letter-spacing:2px}
+h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:78px;margin-top:14px;letter-spacing:-1px}
+.sub{font-size:28px;color:var(--sub);margin-top:10px;text-align:center;max-width:1500px;line-height:1.55}
+.cols{display:flex;gap:26px;margin-top:40px}
+.c{width:660px;background:var(--card);border:2px solid var(--line);border-radius:30px;padding:38px 36px;
+  box-shadow:0 2px 14px rgba(17,17,17,.05);position:relative;overflow:hidden}
+.c::before{content:"";position:absolute;top:0;left:0;right:0;height:7px;background:rgba(17,17,17,.22)}
+.c.us{border-color:var(--accent);box-shadow:0 20px 60px rgba(212,252,80,.36)}
+.c.us::before{background:var(--accent)}
+.tick{font-family:'Instrument Serif',Georgia,serif;font-size:56px;line-height:1}
+.era{font-size:23px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-top:10px}
+.kv{margin-top:26px;border-top:2px solid var(--line);padding-top:6px}
+.k{display:flex;justify-content:space-between;align-items:baseline;padding:15px 0;border-bottom:2px solid var(--line);font-size:25px;color:var(--sub)}
+.k:last-child{border-bottom:none}
+.k b{color:var(--ink);font-weight:700;font-size:27px;font-variant-numeric:tabular-nums;text-align:right;max-width:330px}
+.k b.bad{color:var(--red)}
+.k b.good{color:var(--lime-ink)}
+.foot{margin-top:38px;background:#111;border-radius:26px;padding:32px 54px;max-width:1960px;text-align:center}
+.foot .t{font-family:'Instrument Serif',Georgia,serif;font-size:46px;color:#fff;line-height:1.24}
+.foot .t em{font-style:italic;color:var(--accent)}
+.foot .s{font-size:24px;color:rgba(255,255,255,.55);margin-top:12px;line-height:1.55}
+</style></head>
+<body><div class="stage"><div class="wrap">
+  <div class="hd"><span class="mark">Ω</span><span class="logo">PONSI</span></div>
+  <h1>We are not the first. We are the honest one.</h1>
+  <div class="sub">Same mechanics. Same math. Same ending. The difference is which page it's printed on.</div>
+  <div class="cols">
+    <div class="c">
+      <div class="tick">OlympusDAO</div>
+      <div class="era">$OHM · 2021 · the original</div>
+      <div class="kv">
+        <div class="k"><span>Peak valuation</span><b>~$4B</b></div>
+        <div class="k"><span>Headline APY</span><b>thousands of %</b></div>
+        <div class="k"><span>Pitched as</span><b>reserve currency</b></div>
+        <div class="k"><span>Risk disclosed</span><b class="bad">in the docs</b></div>
+        <div class="k"><span>How it went</span><b class="bad">−99% from ATH</b></div>
+      </div>
+    </div>
+    <div class="c">
+      <div class="tick">Wonderland</div>
+      <div class="era">$TIME · 2021 · the biggest fork</div>
+      <div class="kv">
+        <div class="k"><span>Peak valuation</span><b>~$2B</b></div>
+        <div class="k"><span>Headline APY</span><b>tens of thousands of %</b></div>
+        <div class="k"><span>Pitched as</span><b>the next OHM</b></div>
+        <div class="k"><span>Risk disclosed</span><b class="bad">no</b></div>
+        <div class="k"><span>How it went</span><b class="bad">treasurer unmasked, collapsed</b></div>
+      </div>
+    </div>
+    <div class="c us">
+      <div class="tick">PONSI</div>
+      <div class="era">$PONSI · 2026 · this one</div>
+      <div class="kv">
+        <div class="k"><span>Peak valuation</span><b>unknown</b></div>
+        <div class="k"><span>Headline APY</span><b>50,000% (simulated)</b></div>
+        <div class="k"><span>Pitched as</span><b class="good">a game and a joke</b></div>
+        <div class="k"><span>Risk disclosed</span><b class="good">in the ticker</b></div>
+        <div class="k"><span>How it goes</span><b>you already know</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot">
+    <div class="t">Every one of these told you what it was.<br><em>Only one of them told you first.</em></div>
+    <div class="s">PONSI is a simulation on an off-chain ledger. It holds no funds, promises no return, and cannot pay one. Peak-valuation and APY figures for OHM and TIME are approximate and from public history. Nothing here is investment advice.</div>
+  </div>
+</div></div></body></html>

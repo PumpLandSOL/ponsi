@@ -1,0 +1,63 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+:root{--accent:#d4fc50;--accent-soft:#f3ffd4;--bg:#f4f4f4;--card:#fff;--ink:#111;
+  --sub:rgba(17,17,17,.55);--mut:rgba(17,17,17,.4);--line:rgba(17,17,17,.1);--lime-ink:#6f9f18}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+.stage{width:2400px;height:1350px;position:relative;overflow:hidden;background:
+  radial-gradient(50% 44% at 50% -8%,rgba(212,252,80,.34),transparent 64%),
+  radial-gradient(46% 40% at 96% 106%,rgba(212,252,80,.14),transparent 62%),
+  var(--bg)}
+.wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:74px 80px}
+.hd{display:flex;align-items:center;gap:16px}
+.mark{font-family:'Instrument Serif',Georgia,serif;font-size:70px;line-height:.8;
+  background:linear-gradient(165deg,#ffffff 3%,#eefbc4 24%,var(--accent) 56%,#93b52f 92%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 rgba(255,255,255,.9)) drop-shadow(0 8px 22px rgba(140,180,40,.5))}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:46px;letter-spacing:2px}
+h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:82px;margin-top:16px;letter-spacing:-1px}
+.sub{font-size:29px;color:var(--sub);margin-top:12px;text-align:center;max-width:1420px;line-height:1.55}
+.row{display:flex;align-items:stretch;gap:26px;margin-top:48px}
+.card{width:620px;background:var(--card);border:2px solid var(--line);border-radius:30px;padding:44px 40px;
+  box-shadow:0 2px 14px rgba(17,17,17,.05);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:7px;background:var(--accent)}
+.n{font-size:24px;font-weight:800;letter-spacing:.18em;color:var(--mut)}
+.card h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:58px;margin-top:14px}
+.card p{font-size:28px;color:var(--sub);line-height:1.62;margin-top:16px}
+.card p b{color:var(--ink);font-weight:600}
+.arrow{display:flex;align-items:center;font-size:76px;color:var(--accent);font-weight:800;
+  filter:drop-shadow(0 4px 14px rgba(140,180,40,.5))}
+.foot{margin-top:44px;background:#111;border-radius:26px;padding:32px 54px;max-width:1900px;text-align:center}
+.foot .t{font-family:'Instrument Serif',Georgia,serif;font-size:44px;color:#fff;line-height:1.26}
+.foot .t em{font-style:italic;color:var(--accent)}
+.foot .s{font-size:25px;color:rgba(255,255,255,.55);margin-top:12px;line-height:1.55}
+</style></head>
+<body><div class="stage"><div class="wrap">
+  <div class="hd"><span class="mark">Ω</span><span class="logo">PONSI</span></div>
+  <h1>How it works</h1>
+  <div class="sub">Three moving parts, same as every reserve protocol since 2021. Nothing here is novel — that is rather the point.</div>
+  <div class="row">
+    <div class="card">
+      <div class="n">I · STAKE</div>
+      <h3>Get in</h3>
+      <p>Stake $PONSI, receive <b>sPONSI</b>. Your balance rebases up every epoch — automatic, compounding, nothing to claim. Your <b>token count</b> goes up. That is the whole of what it does.</p>
+    </div>
+    <div class="arrow">→</div>
+    <div class="card">
+      <div class="n">II · BOND</div>
+      <h3>Feed the treasury</h3>
+      <p>Sell <b>ETH or USDC</b> to the protocol at a discount for vesting $PONSI. Every bond becomes <b>protocol-owned reserve</b> — the one part of this design that was always honest.</p>
+    </div>
+    <div class="arrow">→</div>
+    <div class="card">
+      <div class="n">III · BACKING</div>
+      <h3>The floor</h3>
+      <p>The treasury backs every token. Backing is <b>real and measurable</b>. It is also <b>not the price</b>, and the gap between those two is where every (3,3) holder has ever been hurt.</p>
+    </div>
+  </div>
+  <div class="foot">
+    <div class="t">The APY is an <em>emission rate</em>, not a return.</div>
+    <div class="s">It pays you in more $PONSI — and more $PONSI is exactly what dilutes the price. Token count going up is not value going up. Any (3,3) that lets you believe otherwise is selling you the confusion on purpose.</div>
+  </div>
+</div></div></body></html>

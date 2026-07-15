@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: ponsi
+    runtime: node
+    plan: free
+    buildCommand: ""
+    startCommand: node server/index.js
+    autoDeploy: true
+    envVars:
+      - key: REBASE_SEC
+        value: "300"
+      - key: APY_TARGET
+        value: "50000"
+      # PONSI_MINT stays unset until $PONSI launches on PONS.
+      # Set it in the Render dashboard to light up the CA bar.

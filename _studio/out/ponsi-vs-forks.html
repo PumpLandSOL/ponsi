@@ -1,0 +1,90 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet"><style>
+:root{--accent:#d4fc50;--accent-soft:#f3ffd4;--bg:#f4f4f4;--card:#fff;--ink:#111;
+  --sub:rgba(17,17,17,.55);--mut:rgba(17,17,17,.4);--line:rgba(17,17,17,.1);--lime-ink:#6f9f18;--red:#d13b30}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+.stage{width:2400px;height:1350px;position:relative;overflow:hidden;background:
+  radial-gradient(50% 42% at 50% -8%,rgba(212,252,80,.32),transparent 64%),
+  radial-gradient(46% 40% at 96% 106%,rgba(212,252,80,.13),transparent 62%),
+  var(--bg)}
+.wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 80px}
+.hd{display:flex;align-items:center;gap:16px}
+.mark{font-family:'Instrument Serif',Georgia,serif;font-size:62px;line-height:.8;
+  background:linear-gradient(165deg,#ffffff 3%,#eefbc4 24%,var(--accent) 56%,#93b52f 92%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 rgba(255,255,255,.9)) drop-shadow(0 8px 22px rgba(140,180,40,.5))}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:42px;letter-spacing:2px}
+h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:78px;margin-top:8px;letter-spacing:-1px}
+.sub{font-size:26px;color:var(--sub);margin-top:8px;text-align:center;max-width:1560px;line-height:1.5}
+table{border-collapse:separate;border-spacing:0;margin-top:34px;width:100%;max-width:2160px;
+  background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 6px 30px rgba(17,17,17,.07)}
+th,td{text-align:left;padding:20px 26px;font-variant-numeric:tabular-nums}
+thead th{font-size:16px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);background:#fafafa;border-bottom:2px solid var(--line)}
+th.r,td.r{text-align:right}
+tbody tr{border-bottom:1px solid var(--line)}
+tbody tr:last-child td{border-bottom:none}
+.proto{font-family:'Instrument Serif',Georgia,serif;font-size:34px;line-height:1}
+.meta{font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--mut);margin-top:5px}
+td .ath{font-size:30px;font-weight:700}
+td .apy{font-size:24px;font-weight:600;color:var(--sub)}
+td .end{font-size:21px;font-weight:600;color:var(--red)}
+tr.us{background:linear-gradient(90deg,rgba(212,252,80,.22),rgba(212,252,80,.08));}
+tr.us td{border-bottom:none}
+tr.us .proto{color:var(--ink)}
+tr.us .end{color:var(--lime-ink)}
+tr.us::after{content:"";}
+.usrow{position:relative}
+.foot{margin-top:22px;font-size:19px;color:var(--mut);text-align:center;max-width:2000px;line-height:1.5}
+</style></head>
+<body><div class="stage"><div class="wrap">
+  <div class="hd"><span class="mark">Ω</span><span class="logo">PONSI</span></div>
+  <h1>Every OHM fork. Same ending.</h1>
+  <div class="sub">The reserve-currency design has run four times before. Here's where each one peaked — and where it is now.</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Protocol</th>
+        <th class="r">ATH (per token)</th>
+        <th class="r">Headline APY</th>
+        <th class="r">How it ended</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="proto">OlympusDAO</div><div class="meta">$OHM · Ethereum · 2021</div></td>
+        <td class="r"><div class="ath">$1,315</div></td>
+        <td class="r"><div class="apy">thousands of %</div></td>
+        <td class="r"><div class="end">≈ −98% from ATH</div></td>
+      </tr>
+      <tr>
+        <td><div class="proto">Wonderland</div><div class="meta">$TIME · Avalanche · 2021</div></td>
+        <td class="r"><div class="ath">$10,064</div></td>
+        <td class="r"><div class="apy">~80,000%</div></td>
+        <td class="r"><div class="end">0xSifu unmasked · collapsed</div></td>
+      </tr>
+      <tr>
+        <td><div class="proto">KlimaDAO</div><div class="meta">$KLIMA · Polygon · 2021</div></td>
+        <td class="r"><div class="ath">$3,688</div></td>
+        <td class="r"><div class="apy">up to 30,000%</div></td>
+        <td class="r"><div class="end">≈ −99% · under $20</div></td>
+      </tr>
+      <tr>
+        <td><div class="proto">Hector DAO</div><div class="meta">$HEC · Fantom · 2021</div></td>
+        <td class="r"><div class="ath">$358</div></td>
+        <td class="r"><div class="apy">thousands of %</div></td>
+        <td class="r"><div class="end">$100M treasury → liquidated</div></td>
+      </tr>
+      <tr class="us">
+        <td><div class="proto">PONSI</div><div class="meta">$PONSI · Robinhood · 2026</div></td>
+        <td class="r"><div class="ath" style="color:var(--lime-ink)">the honest one</div></td>
+        <td class="r"><div class="apy">50,000% <span style="color:var(--mut)">(simulated)</span></div></td>
+        <td class="r"><div class="end">same engine · told up front</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="foot">ATH figures are approximate, from public history (CoinGecko / CoinMarketCap, Oct–Nov 2021 peaks). PONSI runs the identical reserve mechanism as an off-chain simulation — no custody, no promised return.</div>
+</div></div></body></html>

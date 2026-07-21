@@ -20,6 +20,9 @@ const SIZES = {
   'ponsi-howitworks': [2400, 1350],
   'ponsi-vs-ohm': [2400, 1350],
   'ponsi-honest': [2400, 1350],
+  'ponsi-tokenomics': [2400, 1350],
+  'ponsi-tech': [2400, 1350],
+  'ponsi-vs-forks': [2400, 1350],
 };
 
 const only = process.argv[2];

@@ -1,0 +1,75 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet"><style>
+:root{--accent:#d4fc50;--accent-soft:#f3ffd4;--bg:#f4f4f4;--card:#fff;--ink:#111;
+  --sub:rgba(17,17,17,.55);--mut:rgba(17,17,17,.4);--line:rgba(17,17,17,.1);--lime-ink:#6f9f18}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+.stage{width:2400px;height:1350px;position:relative;overflow:hidden;background:
+  radial-gradient(50% 44% at 50% -8%,rgba(212,252,80,.34),transparent 64%),
+  radial-gradient(46% 40% at 96% 106%,rgba(212,252,80,.14),transparent 62%),
+  var(--bg)}
+.wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 84px}
+.hd{display:flex;align-items:center;gap:16px}
+.mark{font-family:'Instrument Serif',Georgia,serif;font-size:66px;line-height:.8;
+  background:linear-gradient(165deg,#ffffff 3%,#eefbc4 24%,var(--accent) 56%,#93b52f 92%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 rgba(255,255,255,.9)) drop-shadow(0 8px 22px rgba(140,180,40,.5))}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:44px;letter-spacing:2px}
+h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:82px;margin-top:12px;letter-spacing:-1px}
+.sub{font-size:28px;color:var(--sub);margin-top:8px;text-align:center;max-width:1500px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px;width:100%;max-width:2040px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px 26px;box-shadow:0 2px 14px rgba(17,17,17,.05);position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--accent)}
+.stat .l{font-size:14px;color:var(--mut);letter-spacing:.09em;text-transform:uppercase;font-weight:700}
+.stat .v{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:52px;margin-top:8px;font-variant-numeric:tabular-nums;line-height:1}
+.stat .s{font-size:16px;color:var(--sub);margin-top:8px}
+.row2{display:flex;gap:16px;margin-top:16px;width:100%;max-width:2040px}
+.dist{flex:1.15;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px 34px;box-shadow:0 2px 14px rgba(17,17,17,.05);display:flex;align-items:center;gap:36px}
+.donut{flex:none;width:190px;height:190px;border-radius:50%;
+  background:conic-gradient(var(--accent) 0 100%,#e9e9e9 0);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 10px 34px rgba(212,252,80,.4)}
+.donut .hole{width:120px;height:120px;border-radius:50%;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.donut .hn{font-family:'Instrument Serif',Georgia,serif;font-size:42px;color:var(--lime-ink);line-height:1}
+.donut .hl{font-size:13px;color:var(--mut);letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin-top:2px}
+.dl{display:flex;flex-direction:column;gap:14px}
+.dl .t{font-family:'Instrument Serif',Georgia,serif;font-size:34px}
+.dl .li{display:flex;align-items:center;gap:12px;font-size:21px;color:var(--sub)}
+.dl .li b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums;width:64px}
+.dl .dot{width:12px;height:12px;border-radius:3px;flex:none}
+.treas{flex:1;background:#111;border-radius:22px;padding:30px 34px;color:#fff;display:flex;flex-direction:column;justify-content:center}
+.treas .t{font-family:'Instrument Serif',Georgia,serif;font-size:34px;color:var(--accent)}
+.treas p{font-size:20px;color:rgba(255,255,255,.7);margin-top:12px;line-height:1.55}
+.treas p b{color:#fff;font-weight:600}
+.foot{margin-top:22px;font-size:19px;color:var(--mut);text-align:center;max-width:1900px;line-height:1.5}
+</style></head>
+<body><div class="stage"><div class="wrap">
+  <div class="hd"><span class="mark">Ω</span><span class="logo">PONSI</span></div>
+  <h1>Tokenomics</h1>
+  <div class="sub">A fixed-supply reserve token on PONS, Robinhood Chain. No team allocation, no VC, no presale.</div>
+
+  <div class="grid">
+    <div class="stat"><div class="l">Total Supply</div><div class="v">1,000,000,000</div><div class="s">fixed · minted on PONS</div></div>
+    <div class="stat"><div class="l">Launch Price</div><div class="v">$0.005</div><div class="s">$5M fully-diluted at launch</div></div>
+    <div class="stat"><div class="l">Target APY</div><div class="v">50,000%</div><div class="s">emission rate, auto-compounded</div></div>
+    <div class="stat"><div class="l">Epoch</div><div class="v">5 min</div><div class="s">105,192 rebases / year</div></div>
+  </div>
+
+  <div class="row2">
+    <div class="dist">
+      <div class="donut"><div class="hole"><div class="hn">100%</div><div class="hl">Fair launch</div></div></div>
+      <div class="dl">
+        <div class="t">Distribution</div>
+        <div class="li"><span class="dot" style="background:#d4fc50"></span><b>100%</b> Public — fair launch on PONS</div>
+        <div class="li"><span class="dot" style="background:#e9e9e9"></span><b>0%</b> Team / founders</div>
+        <div class="li"><span class="dot" style="background:#e9e9e9"></span><b>0%</b> VC / presale / private</div>
+      </div>
+    </div>
+    <div class="treas">
+      <div class="t">The Treasury</div>
+      <p>Bonds sell discounted $PONSI for <b>ETH, LP or USDC</b> — every bond becomes protocol-owned reserve that <b>backs every token</b>. The treasury only grows.</p>
+    </div>
+  </div>
+
+  <div class="foot">Bond discounts: ETH 6.5% · LP 13% · USDC 4%, 5-day vest. Rebase is a deterministic off-chain index — PONS mints fixed supply, so emissions are simulated, not minted. Backing is real and measurable; it is not the price.</div>
+</div></div></body></html>

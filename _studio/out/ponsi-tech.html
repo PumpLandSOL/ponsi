@@ -1,0 +1,91 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet"><style>
+:root{--accent:#d4fc50;--accent-soft:#f3ffd4;--bg:#f4f4f4;--card:#fff;--ink:#111;
+  --sub:rgba(17,17,17,.55);--mut:rgba(17,17,17,.4);--line:rgba(17,17,17,.1);--lime-ink:#6f9f18}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+.stage{width:2400px;height:1350px;position:relative;overflow:hidden;background:
+  radial-gradient(50% 44% at 50% -8%,rgba(212,252,80,.34),transparent 64%),
+  radial-gradient(46% 40% at 96% 106%,rgba(212,252,80,.14),transparent 62%),
+  var(--bg)}
+.wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 80px}
+.hd{display:flex;align-items:center;gap:16px}
+.mark{font-family:'Instrument Serif',Georgia,serif;font-size:64px;line-height:.8;
+  background:linear-gradient(165deg,#ffffff 3%,#eefbc4 24%,var(--accent) 56%,#93b52f 92%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 rgba(255,255,255,.9)) drop-shadow(0 8px 22px rgba(140,180,40,.5))}
+.logo{font-family:'Instrument Serif',Georgia,serif;font-size:42px;letter-spacing:2px}
+h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:78px;margin-top:10px;letter-spacing:-1px}
+.sub{font-size:27px;color:var(--sub);margin-top:8px;text-align:center;max-width:1560px;line-height:1.5}
+.diagram{display:flex;align-items:stretch;gap:0;margin-top:44px;width:100%;max-width:2120px}
+.col{flex:1;display:flex;flex-direction:column}
+.tag{font-size:15px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:12px;text-align:center}
+.tag.on{color:var(--lime-ink)}
+.box{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px 28px;box-shadow:0 2px 14px rgba(17,17,17,.05);flex:1;display:flex;flex-direction:column;justify-content:center}
+.box.chain{border:2px solid var(--accent);box-shadow:0 14px 44px rgba(212,252,80,.32)}
+.box.dark{background:#111;color:#fff}
+.box h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:38px;line-height:1.05}
+.box.dark h3{color:var(--accent)}
+.box .k{font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--lime-ink);margin-top:6px;letter-spacing:.02em}
+.box p{font-size:20px;color:var(--sub);margin-top:14px;line-height:1.55}
+.box.dark p{color:rgba(255,255,255,.72)}
+.box p b{color:var(--ink);font-weight:600}.box.dark p b{color:#fff}
+.arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 20px;flex:none}
+.arrow .a{font-size:52px;color:var(--accent);font-weight:800;filter:drop-shadow(0 3px 10px rgba(140,180,40,.5))}
+.arrow .al{font-size:14px;color:var(--mut);font-weight:700;letter-spacing:.06em;margin-top:6px;text-align:center;max-width:120px}
+.ops{display:flex;gap:16px;margin-top:20px;width:100%;max-width:2120px}
+.op{flex:1;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 24px;box-shadow:0 2px 12px rgba(17,17,17,.04);display:flex;align-items:baseline;gap:12px}
+.op .n{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--lime-ink)}
+.op .tt{font-weight:700;font-size:22px}
+.op .d{font-size:17px;color:var(--sub);margin-left:auto;text-align:right;max-width:300px;line-height:1.4}
+.formula{margin-top:24px;background:#111;border-radius:18px;padding:20px 40px;display:flex;align-items:center;gap:26px}
+.formula .f{font-family:'JetBrains Mono',monospace;font-size:30px;color:var(--accent);font-weight:600}
+.formula .fd{font-size:19px;color:rgba(255,255,255,.7);line-height:1.45}
+.formula .fd b{color:#fff;font-weight:600}
+</style></head>
+<body><div class="stage"><div class="wrap">
+  <div class="hd"><span class="mark">Ω</span><span class="logo">PONSI</span></div>
+  <h1>How the tech works</h1>
+  <div class="sub">One object lives on-chain. Everything else is a deterministic off-chain engine — because PONS mints fixed supply, so nothing can emit new tokens.</div>
+
+  <div class="diagram">
+    <div class="col">
+      <div class="tag on">On-chain · Robinhood Chain</div>
+      <div class="box chain">
+        <h3>$PONSI token</h3>
+        <div class="k">fixed-supply ERC-20</div>
+        <p>The <b>only</b> object that touches a blockchain. 1B supply, no mint authority. You buy and sell it on PONS.</p>
+      </div>
+    </div>
+    <div class="arrow"><div class="a">→</div><div class="al">wallet address</div></div>
+    <div class="col">
+      <div class="tag">Off-chain · deterministic engine</div>
+      <div class="box dark">
+        <h3>The ledger</h3>
+        <div class="k" style="color:#8fd4ff">~100 lines · dependency-free Node</div>
+        <p>State keyed to your <b>0x</b> address. Reads the wallet, never signs or custodies. The index, treasury and every balance live here.</p>
+      </div>
+    </div>
+    <div class="arrow"><div class="a">→</div><div class="al">index applied</div></div>
+    <div class="col">
+      <div class="tag">Output</div>
+      <div class="box">
+        <h3>sPONSI</h3>
+        <div class="k">balance × live index</div>
+        <p>Your staked balance, rebased up every epoch. Same math for everyone — no oracle, no trust.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ops">
+    <div class="op"><span class="n">01</span><span class="tt">Stake</span><span class="d">lock $PONSI → agons; balance = agons × index</span></div>
+    <div class="op"><span class="n">02</span><span class="tt">Bond</span><span class="d">sell assets at a discount → treasury grows</span></div>
+    <div class="op"><span class="n">03</span><span class="tt">Rebase</span><span class="d">index compounds every 5 min epoch</span></div>
+  </div>
+
+  <div class="formula">
+    <div class="f">index ×= (1 + rate)</div>
+    <div class="fd"><b>Deterministic & catch-up safe.</b> On boot the engine replays every missed epoch, so <b>(1 + rate)ⁿ</b> yields the exact same index for every wallet, at any time. No sequencer, no divergence.</div>
+  </div>
+</div></div></body></html>

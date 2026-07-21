@@ -17,7 +17,19 @@ const PONSI_MINT = process.env.PONSI_MINT || '';               // CA bar (dorman
 const REBASE_SEC = +(process.env.REBASE_SEC || 300);           // epoch length (demo: 5 min)
 const APY_TARGET = +(process.env.APY_TARGET || 50000);         // displayed APY %  (OHM-style, simulated)
 const TOTAL_SUPPLY = +(process.env.TOTAL_SUPPLY || 1e9);       // PONS mints fixed supply
-const TOKEN_PRICE = +(process.env.TOKEN_PRICE || 0.005);       // $ per PONSI (until a real pool is read)
+let TOKEN_PRICE = +(process.env.TOKEN_PRICE || 0.005);         // $ per PONSI — overridden by the live pool price below
+// live price: once PONSI_MINT is set, mark to the real Robinhood-chain pool (deepest pair wins)
+async function pollPrice() {
+  if (!PONSI_MINT) return;
+  try {
+    const r = await fetch('https://api.dexscreener.com/latest/dex/tokens/' + PONSI_MINT, { headers: { accept: 'application/json' } });
+    if (!r.ok) return;
+    const pairs = ((await r.json()).pairs || []).filter((p) => p.chainId === 'robinhood' && +p.priceUsd > 0);
+    pairs.sort((a, b) => ((b.liquidity && b.liquidity.usd) || 0) - ((a.liquidity && a.liquidity.usd) || 0));
+    if (pairs[0]) TOKEN_PRICE = +pairs[0].priceUsd;
+  } catch (e) { /* keep last good */ }
+}
+pollPrice(); setInterval(pollPrice, 60000);
 const SEED_BALANCE = +(process.env.SEED_BALANCE || 1000);      // demo: new wallet starts with this PONSI to try staking
 // per-rebase rate derived from target APY
 const REBASES_YR = 31557600 / REBASE_SEC;

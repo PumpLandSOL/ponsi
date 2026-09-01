@@ -31,6 +31,38 @@ async function pollPrice() {
 }
 pollPrice(); setInterval(pollPrice, 60000);
 const SEED_BALANCE = +(process.env.SEED_BALANCE || 1000);      // demo: new wallet starts with this PONSI to try staking
+// V2: real ETH bonds — deposits go to the treasury wallet and are verified on-chain
+const TREASURY = (process.env.TREASURY_WALLET || '0x8B74239372f88D934a6d7E56d8cb33a9e5cd379D').toLowerCase();
+const RPC = process.env.RH_RPC_URL || 'https://rpc.mainnet.chain.robinhood.com'; // Robinhood Chain, id 4663
+let ETH_USD = +(process.env.ETH_USD || 3300);
+async function pollEth() {
+  try {
+    const r = await fetch('https://api.coinbase.com/v2/prices/ETH-USD/spot');
+    const j = await r.json();
+    const v = +((j.data || {}).amount);
+    if (v > 0) ETH_USD = v;
+  } catch (e) { /* keep last good */ }
+}
+pollEth(); setInterval(pollEth, 60000);
+async function rpc(method, params) {
+  const r = await fetch(RPC, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }) });
+  const j = await r.json();
+  if (j.error) throw new Error(j.error.message);
+  return j.result;
+}
+// returns {err} or {eth} — the verified ETH amount this tx paid the treasury
+async function verifyPayTx(hash, from) {
+  if (!/^0x[0-9a-fA-F]{64}$/.test(hash || '')) return { err: 'bad tx hash' };
+  if ((db.usedTxs || []).includes(hash.toLowerCase())) return { err: 'tx already redeemed' };
+  const [tx, rcpt] = await Promise.all([rpc('eth_getTransactionByHash', [hash]), rpc('eth_getTransactionReceipt', [hash])]);
+  if (!tx || !rcpt) return { err: 'tx not confirmed yet — retry in a moment' };
+  if (rcpt.status !== '0x1') return { err: 'tx failed on-chain' };
+  if ((tx.to || '').toLowerCase() !== TREASURY) return { err: 'tx does not pay the treasury' };
+  if (from && (tx.from || '').toLowerCase() !== from.toLowerCase()) return { err: 'tx sender mismatch' };
+  const eth = Number(BigInt(tx.value || '0x0') / 10n ** 9n) / 1e9;
+  if (!(eth > 0)) return { err: 'tx carried no ETH' };
+  return { eth };
+}
 // per-rebase rate derived from target APY
 const REBASES_YR = 31557600 / REBASE_SEC;
 const RATE = Math.pow(1 + APY_TARGET / 100, 1 / REBASES_YR) - 1;
@@ -100,7 +132,7 @@ function body(req) { return new Promise((r) => { let b = ''; req.on('data', (c) 
 
 http.createServer(async (req, res) => {
   const u = req.url.split('?')[0];
-  if (u === '/api/config') return json(res, 200, { token: TOKEN, rebaseSec: REBASE_SEC, apy: APY_TARGET, mint: PONSI_MINT, network: 'robinhood-chain' });
+  if (u === '/api/config') return json(res, 200, { token: TOKEN, rebaseSec: REBASE_SEC, apy: APY_TARGET, mint: PONSI_MINT, network: 'robinhood-chain', treasury: TREASURY || null, ethUsd: ETH_USD });
   if (u === '/api/metrics') return json(res, 200, metrics());
   if (req.method === 'POST' && u === '/api/account') { const d = await body(req); if (!isWallet(d.wallet || '')) return json(res, 200, { error: 'connect a valid EVM wallet' }); return json(res, 200, account(d.wallet)); }
   if (req.method === 'POST' && u === '/api/stake') { const d = await body(req); if (!isWallet(d.wallet || '')) return json(res, 200, { error: 'bad wallet' }); const w = W(d.wallet); const idx = liveIndex(); const amt = Math.max(0, Math.min(+d.amount || 0, w.balance)); if (amt <= 0) return json(res, 200, { error: 'nothing to stake' }); w.balance -= amt; const ag = amt / idx; w.agons += ag; db.totalAgons += ag; save(); return json(res, 200, { ok: true, ...account(d.wallet) }); }
@@ -108,7 +140,18 @@ http.createServer(async (req, res) => {
   if (req.method === 'POST' && u === '/api/bond') {
     const d = await body(req); if (!isWallet(d.wallet || '')) return json(res, 200, { error: 'bad wallet' });
     const m = BONDS.find((b) => b.id === d.market); if (!m) return json(res, 200, { error: 'bad market' });
-    const usd = Math.max(0, +d.amount || 0); if (usd <= 0) return json(res, 200, { error: 'enter an amount' });
+    let usd;
+    if (TREASURY) {
+      // live desk: only ETH, and only against a real verified payment to the treasury
+      if (m.id !== 'eth') return json(res, 200, { error: 'the ETH desk is the only live desk right now' });
+      let v; try { v = await verifyPayTx(String(d.tx || ''), d.wallet); } catch (e) { return json(res, 200, { error: 'rpc error: ' + e.message }); }
+      if (v.err) return json(res, 200, { error: v.err });
+      db.usedTxs = db.usedTxs || [];
+      db.usedTxs.push(String(d.tx).toLowerCase());
+      usd = v.eth * ETH_USD;
+    } else {
+      usd = Math.max(0, +d.amount || 0); if (usd <= 0) return json(res, 200, { error: 'enter an amount' });
+    }
     const payout = usd / (TOKEN_PRICE * (1 - m.discount)); // discounted PONSI
     const w = W(d.wallet); const now = Date.now();
     w.bonds.push({ market: m.name, payout, start: now, end: now + m.vestDays * 86400000, claimed: 0, done: false });

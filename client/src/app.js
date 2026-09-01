@@ -107,7 +107,7 @@
         <div class="disc">${(b.discount * 100).toFixed(1)}%</div><div class="dl">discount · ${b.vestDays}-day vest</div>
         <div class="br"><span>Bond price</span><b>$${b.price.toFixed(4)}</b></div>
         <div class="br"><span>Discount vs market</span><b style="color:var(--success)">+${(b.discount * 100).toFixed(1)}%</b></div>
-        <div class="bf"><input id="bondAmt_${b.id}" type="text" inputmode="decimal" placeholder="$ amount"><button data-bond="${b.id}">Bond</button></div>
+        <div class="bf"><input id="bondAmt_${b.id}" type="text" inputmode="decimal" placeholder="${b.id === 'eth' ? 'ETH amount' : '$ amount'}"><button data-bond="${b.id}">Bond</button></div>
       </div>`).join('');
     $('bondCards').querySelectorAll('[data-bond]').forEach((btn) => btn.addEventListener('click', () => doBond(btn.dataset.bond)));
   }
@@ -132,10 +132,39 @@
     const r = await post('/api/' + stakeMode, { wallet, amount: amt });
     if (r.error) return toast(r.error); A = r; reanchor(); renderAccount(); $('stakeAmt').value = ''; toast((stakeMode === 'stake' ? 'Staked ' : 'Unstaked ') + tok(amt) + ' $PONSI (3,3)');
   };
+  let CFG2 = null;
+  async function cfg() { if (!CFG2) { try { CFG2 = await (await fetch('/api/config')).json(); } catch (e) { CFG2 = {}; } } return CFG2; }
+  // real ETH bond: send the ETH to the treasury on Robinhood Chain, wait for the
+  // receipt, then redeem the tx hash at the bond desk (server verifies on-chain)
+  async function payTreasury(amtEth, treasury) {
+    const eth = window.ethereum;
+    if (!eth) { toast('no EVM wallet found'); return null; }
+    try { await eth.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: '0x1237' }] }); } catch (e) {}
+    const wei = '0x' + BigInt(Math.round(amtEth * 1e9) * 1e9).toString(16);
+    toast('confirm the ' + amtEth + ' ETH deposit in your wallet…');
+    const hash = await eth.request({ method: 'eth_sendTransaction', params: [{ from: wallet, to: treasury, value: wei }] });
+    toast('deposit sent — waiting for the chain…');
+    for (let i = 0; i < 60; i++) {
+      await new Promise((r) => setTimeout(r, 2000));
+      const rc = await eth.request({ method: 'eth_getTransactionReceipt', params: [hash] }).catch(() => null);
+      if (rc && rc.status === '0x1') return hash;
+      if (rc && rc.status === '0x0') { toast('the deposit failed on-chain'); return null; }
+    }
+    toast('still confirming — try the bond again in a moment');
+    return null;
+  }
   async function doBond(id) {
     if (!isW(wallet)) return toast('connect your wallet first');
     const amt = parseFloat(($('bondAmt_' + id) || {}).value); if (!(amt > 0)) return toast('enter an amount');
-    const r = await post('/api/bond', { wallet, market: id, amount: amt });
+    const c = await cfg();
+    let tx;
+    if (c.treasury && id === 'eth') {
+      try { tx = await payTreasury(amt, c.treasury); } catch (e) { return toast('deposit cancelled'); }
+      if (!tx) return;
+    } else if (c.treasury) {
+      return toast('the ETH desk is the only live desk right now');
+    }
+    const r = await post('/api/bond', { wallet, market: id, amount: amt, tx });
     if (r.error) return toast(r.error); A = r; renderYourBonds(); loadMetrics(); $('bondAmt_' + id).value = ''; toast('Bonded — ' + tok(r.payout) + ' $PONSI vesting');
   }
   async function doClaim(autostake) {

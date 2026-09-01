@@ -41,7 +41,7 @@ const BONDS = [
 ];
 
 // ---------- state ----------
-let db = { index: 1, epoch: 0, lastRebase: Date.now(), treasury: +(process.env.TREASURY_SEED || 84000), totalAgons: 0, wallets: {} };
+let db = { index: 1, epoch: 0, lastRebase: Date.now(), treasury: +(process.env.TREASURY_SEED || 0), totalAgons: 0, wallets: {} };
 try { db = Object.assign(db, JSON.parse(fs.readFileSync(DATA_PATH, 'utf8'))); } catch (e) {}
 if (!db.wallets) db.wallets = {};
 let saveT = null; function save() { if (saveT) return; saveT = setTimeout(() => { saveT = null; try { fs.writeFileSync(DATA_PATH, JSON.stringify(db)); } catch (e) {} }, 800); }
@@ -62,15 +62,19 @@ function metrics() {
   const leaderboard = Object.entries(db.wallets).map(([a, w]) => ({ a, staked: w.agons * idx }))
     .filter((x) => x.staked > 0.001).sort((x, y) => y.staked - x.staked).slice(0, 8)
     .map((x) => ({ wallet: x.a.slice(0, 4) + '…' + x.a.slice(-4), staked: x.staked, share: ts > 0 ? x.staked / ts : 0 }));
-  const backing = db.treasury / circulating();
+  // V2: the treasury ledger marks to reality — bonded value on top of a floor that
+  // tracks the live pool (TREASURY_PCT of market cap; no more fantasy $84k seed).
+  const treasuryFloor = TOKEN_PRICE * circulating() * +(process.env.TREASURY_PCT || 0.30);
+  const treasuryNow = Math.max(db.treasury, treasuryFloor);
+  const backing = treasuryNow / circulating();
   // runway: days the treasury can fund current reward emissions (rewards per day in $ vs treasury)
   const rewardsPerDay = ts * (Math.pow(1 + RATE, 86400 / REBASE_SEC) - 1) * TOKEN_PRICE;
   // nothing staked => nothing emitting => runway is undefined, not zero. null so the UI can say so.
-  const runway = rewardsPerDay > 0 ? db.treasury / rewardsPerDay : null;
+  const runway = rewardsPerDay > 0 ? treasuryNow / rewardsPerDay : null;
   return {
     token: TOKEN, apy: APY_TARGET, rate: RATE, index: +idx.toFixed(6), epoch: db.epoch,
     totalStaked: ts, circulating: circulating(), stakingRatio: ts / circulating(),
-    treasury: db.treasury, backingPerToken: backing, price: TOKEN_PRICE, marketCap: TOKEN_PRICE * circulating(),
+    treasury: treasuryNow, backingPerToken: backing, price: TOKEN_PRICE, marketCap: TOKEN_PRICE * circulating(),
     runwayDays: runway, rebaseSec: REBASE_SEC, nextRebaseIn: Math.max(0, REBASE_SEC - (Date.now() - db.lastRebase) / 1000),
     bonds: BONDS.map((b) => ({ id: b.id, name: b.name, discount: b.discount, vestDays: b.vestDays, price: TOKEN_PRICE * (1 - b.discount) })),
     leaderboard, stakers: leaderboard.length, mint: PONSI_MINT,

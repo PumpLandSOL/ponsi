@@ -47,7 +47,7 @@ fs.writeFileSync(path.join(OUT, 'ponsi-v2-keyart.html'), page(`
       <div class="glass" style="padding:26px 44px;font-size:30px;font-weight:700">Ω (3,3) · 50,000% APY</div>
     </div>
   </div>
-  <div class="foot"><span>the name is the risk disclosure</span><span><b>$PONSI · ponsponzi.xyz</b></span></div>`));
+  <div class="foot"><span>the name is the risk disclosure</span><span><b>$PONSI · ponsponsi.xyz</b></span></div>`));
 
 // 2) THE EARLY CALL — PONS 10M -> 500M
 fs.writeFileSync(path.join(OUT, 'ponsi-v2-early.html'), page(`
@@ -74,7 +74,7 @@ fs.writeFileSync(path.join(OUT, 'ponsi-v2-early.html'), page(`
       <div style="display:flex;justify-content:space-between;margin-top:18px;font-size:28px;font-weight:700"><span style="color:var(--mut)">then</span><span class="serif" style="font-size:52px;color:#5f7d10">50×</span><span style="color:var(--mut)">now</span></div>
     </div>
   </div>
-  <div class="foot"><span>PONS figures per public trackers · not affiliated with PONS</span><span><b>$PONSI · ponsponzi.xyz</b></span></div>`));
+  <div class="foot"><span>PONS figures per public trackers · not affiliated with PONS</span><span><b>$PONSI · ponsponsi.xyz</b></span></div>`));
 
 // 3) WHAT'S NEW IN V2
 const rowHtml = (n, t, d) => `<div style="display:flex;align-items:center;gap:36px;padding:34px 46px;border-top:1px solid var(--line)">
@@ -92,6 +92,6 @@ fs.writeFileSync(path.join(OUT, 'ponsi-v2-whatsnew.html'), page(`
       ${rowHtml('04','Still (3,3)','Stake, bond, rebase every 5 minutes, 50,000% APY — the machine you know.')}
     </div>
   </div>
-  <div class="foot"><span>the name is the risk disclosure · nothing here custodies funds</span><span><b>$PONSI · ponsponzi.xyz</b></span></div>`));
+  <div class="foot"><span>the name is the risk disclosure · nothing here custodies funds</span><span><b>$PONSI · ponsponsi.xyz</b></span></div>`));
 
 console.log('wrote 3 v2 assets');

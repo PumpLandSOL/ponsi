@@ -1,0 +1,90 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#d4fc50;--soft:#f3ffd4;--bg:#f4f4f4;--ink:#111;--sub:rgba(17,17,17,.55);--mut:rgba(17,17,17,.4);--deep:#5f7d10;--lime:#93b52f}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:
+  radial-gradient(52% 46% at 50% -8%,rgba(212,252,80,.45),transparent 64%),
+  radial-gradient(38% 34% at 94% 20%,rgba(212,252,80,.2),transparent 60%),
+  radial-gradient(56% 44% at 6% 104%,rgba(212,252,80,.18),transparent 62%),var(--bg);-webkit-font-smoothing:antialiased}
+.scene{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;padding:0 120px}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+.pill{display:inline-flex;font-size:22px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--deep);
+  background:var(--soft);border:2px solid rgba(212,252,80,.7);border-radius:999px;padding:12px 30px}
+.glass{background:rgba(255,255,255,.75);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.95);border-radius:32px;
+  box-shadow:0 26px 70px rgba(17,17,17,.10)}
+#s1 .h{font-size:96px;line-height:1.05;letter-spacing:-1.5px;margin-top:34px;max-width:1500px}
+#s1 .h b{color:var(--lime);font-weight:400}
+#s2 .big{font-size:200px;letter-spacing:-3px;line-height:1}
+#s2 .big .then{color:var(--mut)}
+#s2 .big .arrow{color:var(--lime);margin:0 26px}
+#s2 .sub{font-size:46px;color:var(--sub);margin-top:26px}
+#s2 .sub b{color:var(--ink)}
+#s3 .h{font-size:150px;letter-spacing:-2px}
+#s3 .h b{color:var(--lime);font-weight:400}
+.slamCard{font-size:96px;font-weight:800;letter-spacing:-1px;line-height:1.15}
+.slamCard small{display:block;font-size:32px;letter-spacing:.22em;color:var(--deep);font-weight:700;margin-top:20px;text-transform:uppercase}
+#s6 .wm{font-size:230px;letter-spacing:-4px;line-height:1}
+#s6 .wm b{font-weight:400;background:linear-gradient(165deg,#c9f23f 8%,#93b52f 60%,#5f7d10 96%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+#s6 .sub{font-size:34px;font-weight:700;letter-spacing:.18em;color:var(--deep);margin-top:24px;text-transform:uppercase}
+#s6 .url{margin-top:40px;font-size:42px;font-weight:800;padding:20px 52px}
+</style></head><body>
+
+<div class="scene" id="s1">
+  <div class="pill">Ω · THE SELF-AWARE RESERVE · ON PONS</div>
+  <div class="h serif">We launched PONSI when PONS<br>was a <b>$10M</b> experiment.</div>
+</div>
+
+<div class="scene" id="s2">
+  <div class="big serif"><span class="then">$10M</span><span class="arrow">→</span><span id="count">$500M</span></div>
+  <div class="sub">PONS did <b>50×</b>. PONSI never left.</div>
+</div>
+
+<div class="scene" id="s3"><div class="h serif">Now it's <b>our</b> turn.</div></div>
+
+<div class="scene" id="s4a"><div class="glass slamCard" style="padding:70px 110px">MARKED TO REALITY<small>live pool price · real $PONSI contract</small></div></div>
+<div class="scene" id="s4b"><div class="glass slamCard" style="padding:70px 110px">HONEST TREASURY<small>telemetry tied to the actual market</small></div></div>
+<div class="scene" id="s4c"><div class="glass slamCard" style="padding:70px 110px">STILL (3,3)<small>rebase every 5 minutes · 50,000% APY</small></div></div>
+
+<div class="scene" id="s6">
+  <div class="wm serif">PONSI <b>V2</b></div>
+  <div class="sub">the name is the risk disclosure</div>
+  <div class="glass url">$PONSI · ponsponzi.xyz</div>
+</div>
+
+<script>
+const S=(id)=>document.getElementById(id);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const easeOut=(k)=>1-Math.pow(1-k,3);
+function fadeUp(el,t,start,dur){const k=clamp((t-start)/dur,0,1);if(t<start){el.style.opacity=0;return}
+  const e=easeOut(k);el.style.opacity=e;el.style.transform='translateY('+(40*(1-e)).toFixed(1)+'px)'}
+function slam(el,t,start,dur){const k=clamp((t-start)/dur,0,1);if(t<start){el.style.opacity=0;return}
+  const e=easeOut(k);const sc=e<.7?2.6-(2.6-.97)*(e/.7):.97+.03*((e-.7)/.3);
+  el.style.opacity=clamp(e/.3,0,1);el.style.transform='scale('+sc.toFixed(4)+')'}
+const fmt=(v)=>v>=1e6?'$'+Math.round(v/1e6)+'M':'$'+Math.round(v/1e3)+'K';
+function win(t,a,b){return t>=a&&t<b?t-a:null}
+
+window.__seek=(t)=>{
+  ['s1','s2','s3','s4a','s4b','s4c','s6'].forEach((id)=>{S(id).style.opacity=0});
+  let lt;
+  if((lt=win(t,200,2700))!==null){fadeUp(S('s1'),lt,0,700);if(lt>2200)S('s1').style.opacity=1-(lt-2200)/300}
+  if((lt=win(t,2900,6500))!==null){
+    S('s2').style.opacity=1;slam(S('s2'),lt,0,500);
+    const k=clamp((lt-300)/2000,0,1);const e=easeOut(k);
+    S('count').textContent=fmt(10e6+(500e6-10e6)*e);
+    S('count').style.color=k>=1?'#5f7d10':'#111';
+    if(lt>3300)S('s2').style.opacity=1-(lt-3300)/300;
+  }
+  if((lt=win(t,6700,8300))!==null){slam(S('s3'),lt,0,500);if(lt>1300)S('s3').style.opacity=1-(lt-1300)/300}
+  if((lt=win(t,8400,9900))!==null){slam(S('s4a'),lt,0,450);if(lt>1250)S('s4a').style.opacity=1-(lt-1250)/250}
+  if((lt=win(t,10000,11500))!==null){slam(S('s4b'),lt,0,450);if(lt>1250)S('s4b').style.opacity=1-(lt-1250)/250}
+  if((lt=win(t,11600,13100))!==null){slam(S('s4c'),lt,0,450);if(lt>1250)S('s4c').style.opacity=1-(lt-1250)/250}
+  if(t>=13300)fadeUp(S('s6'),t,13300,700);
+  return true;
+};
+window.__END=15000;
+window.__seek(0);
+</script>
+</body></html>
